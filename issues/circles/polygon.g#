@@ -1,0 +1,29 @@
+(cut regular polygon to interpolate a circle)
+#1=8 (radius)
+#2=0 (start angle, degrees)
+#3=360 (end angle)
+#4=64 (steps)
+#5=[[#3-#2]/#4] (angle step)
+#10=0 (X centre)
+#11=0 (Y centre)
+#12=2 (safe Z)
+#13=-0.4 (cutting Z)
+#14=30 (feed rate)
+G17 G21 G90
+G00 Z#12
+G00 X#10 Y#11 (travel to the circle centre)
+#8=[#1*cos[#2]] (start x)
+#9=[#1*sin[#2]] (start y)
+G00 X#8 Y#9 (travel to the start point)
+G01 Z#13 F#14
+#6=1 (step counter)
+o100 while [#6 LE #4]
+   #7=[#2+#5*#6] (current angle)
+   #8=[#1*cos[#7]] (current x)
+   #9=[#1*sin[#7]] (current y)
+   G01 X#8 Y#9 (debug,a=#7,x=#8,y=#9)
+   #6=[#6+1]
+o100 endwhile
+G00 Z#12
+G00 X#10 Y#11 (back to the centre)
+M30

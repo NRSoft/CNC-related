@@ -1,0 +1,8 @@
+G17 G21 G90 (use mm)
+G00 Z2 (above the surface)
+G00 X-8 Y0 (move to the start point)
+G01 Z-0.3 F30 (down to cutting, slow feed)
+G02 X8 Y0 R8 F30 (first CW semi-circle)
+G02 X-8 Y0 R8 (second CW semi-circle)
+G03 X8 Y0 R8 (first CCW semi-circle back)
+G03 X-8 Y0 R8 (second CCW semi-circle back)
